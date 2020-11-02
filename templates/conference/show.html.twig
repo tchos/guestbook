@@ -7,6 +7,7 @@
 {% block body %}
     <h2>{{ conference }} Conference</h2>
     {% if comments|length > 0 %}
+        <div>Il y'a {{ comments|length }} commentaires.</div>
         {% for comment in comments %}
             {% if comment.photoFilename %}
                 <img src = "{{ asset('uploads/photos/' ~ comment.photofilename) }}" />
@@ -17,6 +18,14 @@
             </small>
             <p>{{ comment.text }}</p>
         {% endfor %}
+
+        {# Gestion de la pagination #}
+        {% if previous >= 0 %}
+            <a href = "{{ path ('conference', {id : conference.id, offset:previous}) }}"><- Précédent</a>
+        {% endif %}
+        {% if next < comments|length %}
+            <a href = "{{ path ('conference', {id : conference.id, offset:next}) }}">Suivant -></a>
+        {% endif %}
     {% else %}
         <div>Audun commentaire trouvé pour cette conférence !!!</div>
     {% endif %}

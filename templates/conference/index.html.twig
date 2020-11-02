@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Conference guestbook{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}
-            <h2>Donnez vos commentaires</h2>
-            {% for conference in conferences %}
-                <h4>{{ conference }}</h4>
-            {% endfor %}
-        {% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{# Héritage du block de base #}
+{% extends "base.html.twig" %}
+
+{% block title %}Conference guestbook{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <h2>Donnez vos commentaires</h2>
+    {% for conference in conferences %}
+        <h4>{{ conference }}</h4>
+        <p>
+            <a href = "{{ path ('conference', {id: conference.id}) }}">Voir</a>
+        </p>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+    
